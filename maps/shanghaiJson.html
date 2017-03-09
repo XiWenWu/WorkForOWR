@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="js/echarts.js"></script>
+    <script src="maps/hubei/yichang.js"></script>
+</head>
+<body style="height: 100%; margin: 0">
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="height: 100%"></div>
+    <script type="text/javascript">
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));    
+
+        function showProvince() {
+            myChart.setOption({
+                //  顶部标题
+                title: {
+                    text: '全国雨量实时在线',
+                    subtext: '云水信息',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+                backgroundColor: '#404a59',
+                //  筛选条件
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data:['雨量监测在线率']
+                },
+                //  数量颜色控件
+                visualMap: {
+                    min: 0,
+                    max: 100,
+                    left: 'left',
+                    top: 'bottom',
+                    text: ['100%','0'],           // 文本，默认为数值文本
+                    calculable: true,
+                    inRange: {
+                        color: ['#defeff','#026fdd']
+                    }
+                },
+                toolbox: {
+                    show: true,
+                    orient: 'vertical',
+                    left: 'right',
+                    top: 'center',
+                    feature: {
+                        dataView: {readOnly: false},
+                        restore: {},
+                        saveAsImage: {}
+                    }
+                },
+                //  地图信息及地图数据
+                series: [
+                    {
+                        name: '雨量监测在线率',
+                        type: 'map',
+                        mapType: 'yichang',
+                        roam: false,
+                        label: {
+                            normal: {
+                                show: true
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        data:[
+                            {name:'', value:10},
+                            {name:'', value:10},
+                            {name:'', value:10},
+                            {name:'', value:10},
+                            {name:'', value:10},
+                            {name:'', value:10}
+                        ]
+                    }
+                ]
+            });
+        };
+
+        showProvince();
+
+    </script>
+
+</body>
+</html>
